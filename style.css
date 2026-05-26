@@ -1,11 +1,13 @@
 :root { /*some initial colours and stuff here to be later used within the CSS code.*/
-    --primary-bg-color: #87ceeb;
-    --text-color: #333;
-    --main-bg-color: #333;
-    --main-text-color: #333;
+    --bg-dark: #07131f;
+    --ocean-dark: #0b2238;
+    --text-color: #f5f5f5;
 }
 
 body, h1, p, ul {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-color);
     margin: 0;
     padding: 0;
 }
@@ -13,12 +15,21 @@ body, h1, p, ul {
 header {
     position: fixed;
 
-    background-color: var(--main-bg-color);
-    color: var(var(--main-text-color));
-    padding: 10px;
+    background-color: #072a4d;
+    padding: 1px;
 
     text-align: center;
     width: 100%;
 
     z-index: 20;
-};
+}
+
+#game-canvas { /*styling the canvas looks using linear gradient, percentage marking different points in colour change.*/
+    position: fixed;
+    inset: 0;
+
+    width:100vw;
+    height:100vh;
+
+    display: block;
+}
