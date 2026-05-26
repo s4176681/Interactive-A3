@@ -1,0 +1,24 @@
+:root { /*some initial colours and stuff here to be later used within the CSS code.*/
+    --primary-bg-color: #87ceeb;
+    --text-color: #333;
+    --main-bg-color: #333;
+    --main-text-color: #333;
+}
+
+body, h1, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: fixed;
+
+    background-color: var(--main-bg-color);
+    color: var(var(--main-text-color));
+    padding: 10px;
+
+    text-align: center;
+    width: 100%;
+
+    z-index: 20;
+};
