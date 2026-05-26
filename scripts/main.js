@@ -1,9 +1,6 @@
 const canvas = document.querySelector("#game-canvas"); //selecting the 'ID' from the styling file.
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
 const shark = new Image();
 shark.src = "img/icons8-shark-64.png"
 
@@ -32,6 +29,11 @@ function animate() { //creating the animate function for my canvas
     //ocean placeholder
     ctx.fillStyle = "#0b2238";
     ctx.fillRect(0, h*0.8, w, h*0.2);
+
+    if (shark.complete) {
+        ctx.drawImage(shark, w/2, h/2, 80, 80);
+    }
 }
 
-animate()
+
+animate();
