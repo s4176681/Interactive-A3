@@ -11,16 +11,17 @@
     <link rel="stylesheet" href="reset.css"/>
     <link rel="stylesheet" href="style.css"/>
     
-    <script src="scripts/main.js" defer></script> <!--main.js goes first because everything else depends on it to exist.-->
+    <script src="scripts/main.js" defer></script>
     <script src="scripts/shark.js" defer></script>
     <script src="scripts/particle.js" defer></script>
     
+    <!--The dependancy matters here when calling and defining different elements and functions from each individual JS file.-->
 </head>
 
 <body>
 
     <!--CANVAS, the play area or screen-->
-    <canvas id="game-canvas"></canvas>
+    <canvas id="art-canvas"></canvas>
 
 </body>
 </html>

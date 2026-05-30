@@ -24,7 +24,7 @@ header {
     z-index: 20;
 }
 
-#game-canvas { /*styling the canvas looks using linear gradient, percentage marking different points in colour change.*/
+#art-canvas { /*styling the canvas looks using linear gradient, percentage marking different points in colour change.*/
     position: fixed;
     inset: 0;
 
