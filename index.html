@@ -1,3 +1,6 @@
+<!--Lets make an 'Experimental art piece'.-->
+<!--The starting idea is an 'Ocean ecosystem'.-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,17 +10,19 @@
 
     <link rel="stylesheet" href="reset.css"/>
     <link rel="stylesheet" href="style.css"/>
-    <script src="scripts/main.js" defer></script>
+    
+    <script src="scripts/main.js" defer></script> <!--main.js goes first because everything else depends on it to exist.-->
+    <script src="scripts/shark.js" defer></script>
+    <script src="scripts/particle.js" defer></script>
     
 </head>
 
 <body>
-    <header>
-        <h1>Title</h1>
-    </header>
 
     <!--CANVAS, the play area or screen-->
     <canvas id="game-canvas"></canvas>
 
 </body>
 </html>
+
+<!--All icons are from https://icons8.com/icons-->
