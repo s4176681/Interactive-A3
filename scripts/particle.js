@@ -5,7 +5,7 @@ const particles = [];
 function spawnParticles() { // we have the load the correct functions in a certain given order corresponding to the other file.
     for (let i = 0; i < 50; i++) { // This number is the particle counter.
         particles.push({
-            x: Math.random() * canvas.width,
+            x: Math.random() * canvas.width, //ai assisted me here on particle creation, helping me to further understand how physics work in the form of a website.
             y: Math.random() * canvas.height,
             vx: (Math.random() - 0.5) * 0.3, // vx = velocity x
             vy: (Math.random() - 0.5) * 0.3, // vy = veloctiy y, as their movement speed
@@ -52,7 +52,7 @@ function animateparts() { //handles all the particle effects
         // drawing the particles
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
-        ctx.fillStyle = "rgba(255,255,255,0.4)";
+        ctx.fillStyle = "rgba(255,255,255,0.4)"; //colour change here
         ctx.fill();
     });
 }
