@@ -1,17 +1,18 @@
 //This is the set up JS file
-const canvas = document.querySelector("#art-canvas"); //selecting the 'ID' from the styling file.
-const ctx = canvas.getContext("2d");
+window.canvas = document.querySelector("#art-canvas"); //selecting the 'ID' from the styling file.
+window.ctx = canvas.getContext("2d");
 
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
 
+resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
 window.addEventListener("DOMContentLoaded", () => {
-    resizeCanvas();
-
+    
+    // DOM ORDER
     initShark(canvas, ctx); // Calling the Shark JS functions
 
     spawnParticles();
@@ -20,6 +21,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 function animate() { //creating the animate function for my canvas
+    if (!window.sharkState) return; // TELL ME IF INITSHARK FAILS
     requestAnimationFrame(animate);
     
     const w = canvas.width;
@@ -27,11 +29,13 @@ function animate() { //creating the animate function for my canvas
     //ctx stands for 'context', representing a paintbrush. Everything visually gets drawn through ctx in JS.
     ctx.clearRect(0,0,w,h);
 
-    //ocean placeholder
+    //ocean bg, 2 different colours for now.
     ctx.fillStyle = "#0b2238";
-    ctx.fillRect(0, h*0.4, w, h*0.6);
+    ctx.fillRect(0, h*0, w, h*0.3);
+    ctx.fillStyle = "#04192d";
+    ctx.fillRect(0, h*0.3, w, h*0.4);
 
-    if (window.shark && shark.naturalWidth) { //checking the states and allowing movements.
+    if (window.shark && window.sharkState && window.shark.naturalWidth) { //checking the states and allowing movements, prevents undefined crashes.
         ctx.drawImage(
             window.shark, 
             window.sharkState.x, 

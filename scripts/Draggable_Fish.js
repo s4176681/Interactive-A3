@@ -1,7 +1,7 @@
 //Shark related JS file.
-function initShark(canvas, ctx) {
+function initShark(canvas, ctx) { //defines data and inpit logic
     const shark = new Image();
-    shark.src = "img/icon8-shark2-64.png"
+    shark.src = "img/icons8-shark2-64.png"
     // DOM: Document object model, representing the HTML document as a tree structure. But we're not using that here.
     const sharkState = { //one object/entity, all logic depends on state, not DOM.
         x: 700,
