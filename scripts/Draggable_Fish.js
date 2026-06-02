@@ -1,18 +1,19 @@
 //Shark related JS file.
 function initShark(canvas, ctx) {
     const shark = new Image();
-    shark.src = "img/icons8-shark2-64.png";
+    shark.src = "img/icon8-shark2-64.png"
     // DOM: Document object model, representing the HTML document as a tree structure. But we're not using that here.
-    const sharkState = { //one object/entity, all logic depends on state, not DOM
+    const sharkState = { //one object/entity, all logic depends on state, not DOM.
         x: 700,
-        y: 300,
+        y: 400,
         w: 80,
         h: 80,
-        dragging: false,
-        vx: 0,
-        vy: 0,// defining initial velocity and angle state.
-        angle: 0
-    }
+        dragging: false
+    };
+
+    //true drag
+    let offsetX = 0;
+    let offsetY = 0;
 
     function isInsideShark(mx, my) { //create a hitbox rectangle inside the shark thats invisible.
         return ( 
@@ -32,26 +33,20 @@ function initShark(canvas, ctx) {
 
         if (isInsideShark(mx, my)) {
             sharkState.dragging = true; //the event listener waits for a click to happen on the shark.
-            // 'is being controled by user input'.
-
+        
+            // the difference between the mouse and the shark pos
+            offsetX = mx - sharkState.x;
+            offsetY = my - sharkState.y;
         }
     });
 
     // EVENT STEP 2
     canvas.addEventListener("mousemove", (e) => {
         if (!sharkState.dragging) return; //this can only happen when dragging has activated.
-        
-        const mx = e.clientX;
-        const my = e.clientY;
 
-        const dx = mx - sharkState.x;
-        const dy = my - sharkState.y;
-
-        //follow, intended to be smooth, now changed to have slight delay
-        sharkState.vx = dx * 0.05;
-        sharkState.vy = dy * 0.05;
-
-        sharkState.angle = Math.atan2(dy, dx);
+        //follow, intended to be smooth
+        sharkState.x = e.clientX - offsetX;
+        sharkState.y = e.clientY - offsetY;
     });
 
     //EVENT STEP 3
@@ -59,8 +54,9 @@ function initShark(canvas, ctx) {
     window.addEventListener("mouseup", () => {
         sharkState.dragging = false; //switch it back to false once its 
     });
-    window.shark = shark;
-    window.sharkState = sharkState; // exposing globally so that the functions being called in main.js work.
-}
 
+    window.shark = shark;
+    window.sharkState = sharkState;
+
+}
 
