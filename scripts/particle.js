@@ -3,7 +3,7 @@
 const particles = [];
 
 function spawnParticles() { // we have the load the correct functions in a certain given order corresponding to the other file.
-    for (let i = 0; i < 50; i++) { // This number is the particle counter.
+    for (let i = 0; i < 30; i++) { // This number is the particle counter.
         particles.push({
             x: Math.random() * canvas.width, //ai assisted me here on particle creation, helping me to further understand how physics work in the form of a website.
             y: Math.random() * canvas.height,
