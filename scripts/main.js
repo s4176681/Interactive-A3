@@ -30,9 +30,14 @@ function animate() { //creating the animate function for my canvas
     //ctx stands for 'context', representing a paintbrush. Everything visually gets drawn through ctx in JS.
     ctx.clearRect(0,0,w,h);
 
-    //ocean placeholder
+    //ocean layers
     ctx.fillStyle = "#0b2238";
-    ctx.fillRect(0, h*0.4, w, h*0.6);
+    ctx.fillRect(0, h*0.3, w, h*0.4);
+    ctx.fillStyle = "#062645";
+    ctx.fillRect(0, h*0, w, h*0.3);
+    //Overlapping layer that covers all, we can manipulate this later and create emotions.
+    ctx.fillStyle = "#00000000";
+    ctx.fillRect(0, h*0, w, h*1);
 
     if (window.shark && shark.naturalWidth) { //checking the states and allowing movements.
         ctx.drawImage(
