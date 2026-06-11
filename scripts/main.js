@@ -53,12 +53,12 @@ function animate() { //creating the animate function for my canvas
     const vx = window.sharkState.vx; // changed the dx/dy to v 'velocity' instead to correct the jittery movements from the angle following.
     const vy = window.sharkState.vy;
 
-    if (Math.abs(vx) > 0.01 || Math.abs(vy) > 0.01) {        
-        window.sharkState.angle = Math.atan2(vy, vx);
-
+    if (Math.abs(vx) > 0.01 || Math.abs(vy) > 0.01) {  // only one angle assignment should exist.      
+        // storing the facing direction separately, don't encode it into angle aspect of the code.
+        if (Math.abs(vx) > 0.01) {
+            window.sharkState.facingRight = vx > 0;
+        }
     }
-
-    const SPRITE_FORWARD_OFFSET = Math.PI; // dev approach
 
     if (window.shark && window.sharkState && window.shark.naturalWidth) { //checking the states and allowing movements, prevents undefined crashes.
         ctx.save(); // remember canvas state
@@ -68,11 +68,25 @@ function animate() { //creating the animate function for my canvas
             window.sharkState.y + window.sharkState.h / 2
         );
 
-        // rotation first step
-        // Math.PI fixes left facing sprite. 
+        const facingRight = window.sharkState.facingRight;
 
-        ctx.rotate(window.sharkState.angle + SPRITE_FORWARD_OFFSET); // Math.PI flips 180* for the Math.atan, which assumes 0 radians.
+        //build the full angle from scratch each time the interaction happens
+        const travelAngle = Math.atan2(vy, vx);
+
+        // Flip horizontally if facing right, first step.
+        //const flipX = window.sharkState.facingRight ? 1 : -1;// these two 1 values make sure the shark is facing which way when being dragged.
+        //ctx.scale(flipX, 1);
+        // scale and rotate ARE ALWAYS IN CONFLICT WITH EACH OTHER!
+        // rotation next step
+        // Offset Math.PI
+        //const angleOffset = window.sharkState.facingRight ? 0 : Math.PI;
+        // Math.PI fixes left facing sprite. 
+        ctx.rotate(travelAngle + Math.PI); // Math.PI flips 180* for the Math.atan, which assumes 0 radians.
         //We're not doing 360 rotations anymore, only 180, but thats only if we're doing horizontal flips.
+
+        if (facingRight) {
+            ctx.scale(1, -1);
+        }
 
         // draw centred shark next step
         ctx.drawImage( 

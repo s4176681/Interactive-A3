@@ -15,7 +15,8 @@ function initShark(canvas, ctx) { //defines data and inpit logic
         w: 80,
         h: 80,
         dragging: false,
-        angle: 0 // setting up shark facing a direction
+        angle: 0,
+        facingRight: false // setting up shark facing a direction
     };
 
     let offsetX = 0;
