@@ -36,12 +36,25 @@ function animate() { //creating the animate function for my canvas
     ctx.fillRect(0, h*0.3, w, h*0.4);
 
     if (window.shark && window.sharkState && window.shark.naturalWidth) { //checking the states and allowing movements, prevents undefined crashes.
+        ctx.save(); // remember canvas state
+
+        ctx.translate(
+            window.sharkState.x + window.sharkState.w / 2,
+            window.sharkState.y + window.sharkState.h / 2
+        );
+
+        ctx.rotate(window.sharkState.angle);
+
         ctx.drawImage(
-            window.shark, 
-            window.sharkState.x, 
-            window.sharkState.y, 
-            window.sharkState.w, 
-            window.sharkState.h); // using the global structure with '.window'.
+            window.shark,
+            -window.sharkState.w / 2,
+            -window.sharkState.h / 2,
+            window.sharkState.w,
+            window.sharkState.h
+        );
+
+        ctx.restore();
+        // using the global structure with '.window'.
     }
 
     // calling particle functions in the other JS file for file structuring purposes.
