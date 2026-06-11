@@ -8,13 +8,16 @@ function initShark(canvas, ctx) { //defines data and inpit logic
         y: 400,
         prevX: 700,
         prevY: 400,
+        vx: 0,
+        vy: 0,
+        targetX: 700,
+        targetY: 400,
         w: 80,
         h: 80,
         dragging: false,
         angle: 0 // setting up shark facing a direction
     };
 
-    //true drag
     let offsetX = 0;
     let offsetY = 0;
 
@@ -53,10 +56,11 @@ function initShark(canvas, ctx) { //defines data and inpit logic
         //if (dx !== 0 || dy !== 0) { //e.movement means how many pixels did the mouse move since the previous move move event??
             //sharkState.angle = Math.atan2(dy, dx); // this line stores the values of what the angle of the shark should be pointing at.
         //}
-        
-        //follow, intended to be smooth
-        sharkState.x = e.clientX - offsetX;
-        sharkState.y = e.clientY - offsetY;
+
+        // mouse move purpose now is to only set a target.
+
+        sharkState.targetX = e.clientX - offsetX;
+        sharkState.targetY = e.clientY - offsetY;
     });
 
     //EVENT STEP 3

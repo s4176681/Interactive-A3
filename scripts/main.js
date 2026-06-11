@@ -35,16 +35,26 @@ function animate() { //creating the animate function for my canvas
     ctx.fillStyle = "#04192d";
     ctx.fillRect(0, h*0.3, w, h*0.4);
 
-    const dx = window.sharkState.x - window.sharkState.prevX;
-    const dy = window.sharkState.y - window.sharkState.prevY;
+    const dx = window.sharkState.targetX - window.sharkState.x;
+    const dy = window.sharkState.targetY - window.sharkState.y;
 
-    if (dx !== 0 || dy !== 0) {
-        window.sharkState.angle = Math.atan2(dy, dx);
+    // 'spring feel type force'
+    window.sharkState.vx += dx * 0.15; 
+    window.sharkState.vy += dy * 0.15;
+
+    // removing the jitter, overshoot, stuttering.
+    window.sharkState.vx *= 0.99;//adjust this value to change the amount of bounce.
+    window.sharkState.vy *= 0.99;//the higher the value, the more bounce and jitter, all the way up to 1 for absolutely no inertia. 
+
+    window.sharkState.x += window.sharkState.vx;
+    window.sharkState.y += window.sharkState.vy;
+
+    const vx = window.sharkState.vx; // changed the dx/dy to v 'velocity' instead to correct the jittery movements from the angle following.
+    const vy = window.sharkState.vy;
+
+    if (Math.abs(vx) > 0.01 || Math.abs(vy) > 0.01) {
+        window.sharkState.angle = Math.atan2(vy, vx);
     }
-
-    window.sharkState.prevX = window.sharkState.x;
-    window.sharkState.prevY = window.sharkState.y;
-
 
     if (window.shark && window.sharkState && window.shark.naturalWidth) { //checking the states and allowing movements, prevents undefined crashes.
         ctx.save(); // remember canvas state
