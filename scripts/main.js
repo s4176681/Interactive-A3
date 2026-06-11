@@ -68,14 +68,13 @@ function animate() { //creating the animate function for my canvas
             window.sharkState.y + window.sharkState.h / 2
         );
 
-        // rotation first
+        // rotation first step
         // Math.PI fixes left facing sprite. 
+
         ctx.rotate(window.sharkState.angle + SPRITE_FORWARD_OFFSET); // Math.PI flips 180* for the Math.atan, which assumes 0 radians.
         //We're not doing 360 rotations anymore, only 180, but thats only if we're doing horizontal flips.
 
-
-        
-        // draw centred shark third step
+        // draw centred shark next step
         ctx.drawImage( 
             window.shark,
             -window.sharkState.w / 2,
