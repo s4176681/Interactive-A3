@@ -41,8 +41,8 @@ function initShark(canvas, ctx) { //defines data and inpit logic
             sharkState.dragging = true; //the event listener waits for a click to happen on the shark.
         
             // the difference between the mouse and the shark pos
-            offsetX = mx - sharkState.x;
-            offsetY = my - sharkState.y;
+            offsetX = mx - (sharkState.x); // 0 ffset setting for now.
+            offsetY = my - (sharkState.y);
         }
     });
 
