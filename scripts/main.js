@@ -35,6 +35,17 @@ function animate() { //creating the animate function for my canvas
     ctx.fillStyle = "#04192d";
     ctx.fillRect(0, h*0.3, w, h*0.4);
 
+    const dx = window.sharkState.x - window.sharkState.prevX;
+    const dy = window.sharkState.y - window.sharkState.prevY;
+
+    if (dx !== 0 || dy !== 0) {
+        window.sharkState.angle = Math.atan2(dy, dx);
+    }
+
+    window.sharkState.prevX = window.sharkState.x;
+    window.sharkState.prevY = window.sharkState.y;
+
+
     if (window.shark && window.sharkState && window.shark.naturalWidth) { //checking the states and allowing movements, prevents undefined crashes.
         ctx.save(); // remember canvas state
 
@@ -43,7 +54,7 @@ function animate() { //creating the animate function for my canvas
             window.sharkState.y + window.sharkState.h / 2
         );
 
-        ctx.rotate(window.sharkState.angle);
+        ctx.rotate(window.sharkState.angle + Math.PI); // flips 180* for the Math.atan, which assumes 0 radians.
 
         ctx.drawImage(
             window.shark,

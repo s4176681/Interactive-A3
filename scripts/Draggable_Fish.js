@@ -6,6 +6,8 @@ function initShark(canvas, ctx) { //defines data and inpit logic
     const sharkState = { //one object/entity, all logic depends on state, not DOM.
         x: 700,
         y: 400,
+        prevX: 700,
+        prevY: 400,
         w: 80,
         h: 80,
         dragging: false,
@@ -45,10 +47,13 @@ function initShark(canvas, ctx) { //defines data and inpit logic
     canvas.addEventListener("mousemove", (e) => {
         if (!sharkState.dragging) return; //this can only happen when dragging has activated.
         
-        const dx = (e.clientX - offsetX) - sharkState.x; // dx/dy means 'new position minus old position'.
-        const dy = (e.clientY - offsetX) - sharkState.y;        
-        sharkState.angle = Math.atan2(dy, dx); // this line stores the values of what the angle of the shark should be pointing at.
-
+        //const dx = e.movementX || 0; // dx/dy means 'new position minus old position'.
+        //const dy = e.movementY || 0; // stabilise movements.
+        
+        //if (dx !== 0 || dy !== 0) { //e.movement means how many pixels did the mouse move since the previous move move event??
+            //sharkState.angle = Math.atan2(dy, dx); // this line stores the values of what the angle of the shark should be pointing at.
+        //}
+        
         //follow, intended to be smooth
         sharkState.x = e.clientX - offsetX;
         sharkState.y = e.clientY - offsetY;
