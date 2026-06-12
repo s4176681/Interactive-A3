@@ -11,10 +11,10 @@ function spawnFish(canvas) {
     schoolCenter.x = canvas.width * 0.3;
     schoolCenter.y = canvas.height * 0.5;
 
-    for (let i = 0; i < 15; i++) { // the number of fish in the school
+    for (let i = 0; i < 50; i++) { // the number of fish in the school
         fishSchool.push({
-            offsetX: (Math.random() - 0.5) * 150, // using offset to spread them individually around the centre.
-            offsetY: (Math.random() - 0.5) * 80,
+            offsetX: (Math.random() - 0.5) * 300, // using offset to spread them individually around the centre.
+            offsetY: (Math.random() - 0.5) * 350, // change this value to adjust how the school looks, clustered, wide spread, etc.
             x: 0, // the actualy draw position
             y: 0,
             vx: 0,
@@ -31,14 +31,6 @@ function animateFish(canvas, ctx, sharkState) { //the elements the 'fish' has to
     // moving the school centre with the current of the environment.
     schoolCenter.x += schoolVX;
 
-    //wrap around for the entire school
-    if (schoolCenter.x > canvas.width + 100) {
-        schoolCenter.x = -100;
-    }
-    if (schoolCenter.x < -100) {
-        schoolCenter.x = canvas.width + 100;
-    }
-
     fishSchool.forEach(f => {
         //targetting the positiong equals to the school center plus individual offset.
         const targetX = schoolCenter.x + f.offsetX;
@@ -47,6 +39,9 @@ function animateFish(canvas, ctx, sharkState) { //the elements the 'fish' has to
         // ease back
         f.vx += (targetX - f.x) * 0.02;
         f.vy += (targetY - f.y) * 0.02;
+
+        f.vx *= 0.9; // stop ORBITING
+        f.vy *= 0.9;
 
         //shark disruption, dispersion effect.
         const dx = f.x - window.sharkState.x;
@@ -61,6 +56,16 @@ function animateFish(canvas, ctx, sharkState) { //the elements the 'fish' has to
         // combining the school movement with scatter
         f.x += f.vx + f.scatterVX;
         f.y += f.vy + f.scatterVY;
+
+        // individual wrap around instead of wrapping the whole school
+        if (f.x > canvas.width + f.size) {
+            f.x = -f.size;
+            f.offsetX -= (canvas.width + f.size * 2);
+        }
+        if (f.x < -f.size) {
+            f.x = canvas.width + f.size;
+            f.offsetX += (canvas.width + f.size * 2);
+        }
 
         // friction on scatter movement, so that fish gather back up after disruption.
         f.scatterVX *= 0.9;
