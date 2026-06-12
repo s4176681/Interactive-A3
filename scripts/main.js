@@ -17,6 +17,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
     spawnParticles();
 
+    spawnFish(canvas); // SPAWN IN THE FISH!
+
     animate();
 });
 
@@ -103,5 +105,6 @@ function animate() { //creating the animate function for my canvas
 
     // calling particle functions in the other JS file for file structuring purposes.
     animateparts();
-    
+    // calling schoo of fish
+    animateFish(canvas, ctx, window.sharkState);
 }
