@@ -37,6 +37,8 @@ function animate() { //creating the animate function for my canvas
     ctx.fillStyle = "#04192d";
     ctx.fillRect(0, h*0.3, w, h*0.4);
 
+    drawMoodOverlay(canvas, ctx, window.sharkState);
+
     const dx = window.sharkState.targetX - window.sharkState.x;
     const dy = window.sharkState.targetY - window.sharkState.y;
 
