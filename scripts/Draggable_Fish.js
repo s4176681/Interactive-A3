@@ -1,4 +1,5 @@
 //Shark related JS file.
+// I tested a lot of different shark PNGs to see which one was the most suitable.
 function initShark(canvas, ctx) { //defines data and inpit logic
     const shark = new Image();
     shark.src = "img/icons8-shark2-64.png"
