@@ -18,4 +18,31 @@ function drawMoodOverlay(canvas, ctx, sharkState) {
     // low opacity, draw
     ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.15)`; // Change this for opacity
     ctx.fillRect(0, 0, window.canvas.width, window.canvas.height);
+
+
+    // PART 2
+    // Soft glow around the shark whether its higher or lower.
+    const glowStrength = depthRatio; // 0 top, 1 is bottom
+    const glowRadius = 150;
+
+    const gradient = ctx.createRadialGradient(
+        window.sharkState.x + window.sharkState.w / 2, // centre on the X axis
+        window.sharkState.y + window.sharkState.h / 2, // centre y
+        0, // inner radius glow
+        window.sharkState.x + window.sharkState.w / 2,
+        window.sharkState.y + window.sharkState.h / 2,
+        glowRadius // outer radius
+    );
+
+    gradient.addColorStop(0, `rgba(40, 100, 160, ${0.4 * glowStrength})`); // inner glow look
+    gradient.addColorStop(1, `rgba(0, 0, 0, 0)`) // transparent fade out
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(
+        window.sharkState.x + window.sharkState.w / 2 - glowRadius,
+        window.sharkState.y + window.sharkState.h / 2 - glowRadius,
+        glowRadius * 2,
+        glowRadius * 2
+    );
+
 }
