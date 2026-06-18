@@ -3,7 +3,7 @@
 const particles = [];
 
 function spawnParticles() { // we have the load the correct functions in a certain given order corresponding to the other file.
-    for (let i = 0; i < 50; i++) { // This number is the particle counter.
+    for (let i = 0; i < 80; i++) { // This number is the particle counter.
         particles.push({
             x: Math.random() * canvas.width, //ai assisted me here on particle creation, helping me to further understand how physics work in the form of a website.
             y: Math.random() * canvas.height,
@@ -18,7 +18,10 @@ function animateparts() { //handles all the particle effects
     particles.forEach(p => {
 
         //movements from the particles, never stops moving, continuous momentum.
-        p.x += p.vx;
+        p.x += 0.05; // drift to the right
+        p.y += 0.01; // and a little bit downwards
+
+        p.x += p.vx; // push calculation
         p.y += p.vy;
 
         //friction on the particles, with a visible slow down.
