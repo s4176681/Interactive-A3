@@ -31,11 +31,14 @@ function animate() { //creating the animate function for my canvas
     //ctx stands for 'context', representing a paintbrush. Everything visually gets drawn through ctx in JS.
     ctx.clearRect(0,0,w,h);
 
-    //ocean bg, 2 different colours for now.
-    ctx.fillStyle = "#0b2238";
-    ctx.fillRect(0, h*0, w, h*0.3);
-    ctx.fillStyle = "#04192d";
-    ctx.fillRect(0, h*0.3, w, h*0.4);
+    //linear gradient bg, upgraded
+    const bgGradient = ctx.createLinearGradient(0, 0, 0, h);
+    bgGradient.addColorStop(0, "#0b2238");
+    bgGradient.addColorStop(0.5, "#04192d");
+    bgGradient.addColorStop(1, "#010d18");
+
+    ctx.fillStyle = bgGradient;
+    ctx.fillRect(0, 0, w, h);
 
     drawMoodOverlay(canvas, ctx, window.sharkState);
 
