@@ -6,6 +6,9 @@
 const fish = new Image();
 fish.src = "img/icons8-fish-24.png"
 
+// timer
+let fishTime = 0;
+
 const fishSchool = []; //array
 let schoolCenter = { x: 0, y: 0 };
 let schoolVX = 0.4; // base velocity, or 'drift' speed through the current of the ocean.
@@ -25,7 +28,9 @@ function spawnFish(canvas) {
             scatterVX: 0,
             scatterVY: 0,
             size: 12 + Math.random() * 6,
-            facingRight: true
+            facingRight: true,
+            timeOffset: Math.random() * Math.PI * 2 // random start pos of the wave
+
         });
     }
 }
@@ -34,10 +39,13 @@ function animateFish(canvas, ctx, sharkState) { //the elements the 'fish' has to
     // moving the school centre with the current of the environment.
     schoolCenter.x += schoolVX;
 
+    fishTime += 0.01; // speed of the waves
+    schoolCenter.y += Math.sin(fishTime) * 0.3; // rise and fall
+
     fishSchool.forEach(f => {
         //targetting the positiong equals to the school center plus individual offset.
         const targetX = schoolCenter.x + f.offsetX;
-        const targetY = schoolCenter.y + f.offsetY;
+        const targetY = schoolCenter.y + f.offsetY + Math.sin(fishTime + f.timeOffset) * 5;
 
         // was snapping back, but adjusting this so that the fish feel like they're swimming instead if bouncing back into their og position.
         const ease = 0.02;
@@ -81,7 +89,7 @@ function animateFish(canvas, ctx, sharkState) { //the elements the 'fish' has to
         }
 
         // MAX SPEED CAP
-        const maxSpeed = 6; // change this accordingly to match desired 'response'.
+        const maxSpeed = 9; // change this accordingly to match desired 'response'.
         const totalVX = f.vx + f.scatterVX;
         const totalVY = f.vy + f.scatterVY;
         const speed = Math.sqrt(totalVX * totalVX + totalVY * totalVY);
@@ -129,7 +137,8 @@ function animateFish(canvas, ctx, sharkState) { //the elements the 'fish' has to
         const flip = f.facingRight ? 1 : -1;
         ctx.scale(flip, 1);
 
-        ctx.drawImage(fish, -f.size, -f.size / 2, f.size * 2, f.size); // drawing the fish here
+        const pulseSize = f.size + Math.sin(fishTime + f.timeOffset) * 1.5;
+        ctx.drawImage(fish, -pulseSize, -pulseSize / 2, pulseSize * 2, pulseSize); // adding a subtle breathing effect to the fish.
 
         ctx.restore();
     })
