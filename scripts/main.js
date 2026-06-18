@@ -105,8 +105,12 @@ function animate() { //creating the animate function for my canvas
         // using the global structure with '.window'.
     }
 
+    // Calling all other functions here! Other than the shark.
+
     // calling particle functions in the other JS file for file structuring purposes.
     animateparts();
-    // calling schoo of fish
+    // calling school of fish
     animateFish(canvas, ctx, window.sharkState);
+    // dragging prompt
+    drawDragPrompt(canvas, ctx, window.sharkState);
 }

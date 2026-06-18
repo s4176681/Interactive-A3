@@ -6,13 +6,13 @@ function initShark(canvas, ctx) { //defines data and inpit logic
     // DOM: Document object model, representing the HTML document as a tree structure. But we're not using that here.
     const sharkState = { //one object/entity, all logic depends on state, not DOM.
         x: 700,
-        y: 400,
+        y: 600,
         prevX: 700,
-        prevY: 400,
+        prevY: 600,
         vx: 0,
         vy: 0,
         targetX: 700,
-        targetY: 400,
+        targetY: 600,
         w: 80,
         h: 80,
         dragging: false,
